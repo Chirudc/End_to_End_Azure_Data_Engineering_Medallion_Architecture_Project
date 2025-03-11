@@ -29,7 +29,7 @@ The Medallion Framework consists of the following structured stages:
 ## End-to-End Process Overview
 ### Raw Data Ingestion
 - Raw data is extracted from an external source using Azure Data Factory’s Copy Activity.
-- The extracted data is stored in the `source_cars_data` table within Azure SQL Database.
+- The extracted data is stored in the source table within Azure SQL Database.
 - A parameterized process is implemented to enable dynamic file selection for ingestion.
 
 ### Incremental Data Processing
