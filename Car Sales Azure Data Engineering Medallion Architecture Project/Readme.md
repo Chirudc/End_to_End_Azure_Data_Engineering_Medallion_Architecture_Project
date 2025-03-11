@@ -10,6 +10,8 @@ The Medallion Framework consists of the following structured stages:
 - **Silver Tier** – Contains refined and enriched data.
 - **Gold Tier** – Provides structured, analytics-ready data.
 
+![Architecture View](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Medallion%20Architecture.png)
+
 ## Core Features
 - **Three-Layered Data Flow**: Data transitions through distinct layers for efficient processing and management.
 - **Automated Data Pipelines**: Azure Data Factory automates ingestion and transformation workflows.
