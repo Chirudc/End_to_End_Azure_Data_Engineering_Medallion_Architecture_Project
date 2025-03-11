@@ -6,9 +6,9 @@ This initiative focuses on building a scalable data engineering solution on Micr
 ## Architecture Breakdown
 The Medallion Framework consists of the following structured stages:
 
-- **Bronze Tier** – Stores raw, unprocessed data.
-- **Silver Tier** – Contains refined and enriched data.
-- **Gold Tier** – Provides structured, analytics-ready data.
+- **Bronze Layer** – Stores raw, unprocessed data.
+- **Silver Layer** – Contains refined and enriched data.
+- **Gold Layer** – Provides structured, analytics-ready data.
 
 ![Architecture View](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Medallion%20Architecture.png)
 
@@ -27,7 +27,7 @@ The Medallion Framework consists of the following structured stages:
 - **Star Schema & SCD Type-1** – Enhances data modeling and historical tracking.
 
 ## End-to-End Process Overview
-### Data Acquisition
+### Raw Data Ingestion
 - Raw data is extracted from an external source using Azure Data Factory’s Copy Activity.
 - The extracted data is stored in the `source_cars_data` table within Azure SQL Database.
 - A parameterized process is implemented to enable dynamic file selection for ingestion.
@@ -58,25 +58,40 @@ The Medallion Framework consists of the following structured stages:
 ### Pipeline 1: Ingestion Mechanism
 - Pulls data from GitHub and loads it into Azure SQL Database.
 
+![Pipeline1](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Pipeline1.png)
+
 ### Pipeline 2: Incremental Data Processing
-- Ensures only new data is added to the Bronze tier.
+- Ensures only new data is added to the Bronze Layer.
 - Azure Data Factory’s expression builder dynamically filters new records based on date criteria.
 - A stored procedure extracts the latest available date to process only fresh data.
+
+![Pipeline2](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Pipeline2.png)
+
 
 ### SQL-Based Data Management
 - SQL tables and stored procedures support data refinement and structured processing.
 
-### Databricks Implementation: Star Schema Transformation
-- Databricks transforms the raw dataset into a structured **star schema model**.
+![SQL Query](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/SQL%20Query.png)
+
+![Stored Procedure](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Stored%20Procedure.png)
+
+### Databricks Pipeline Run: Star Schema Transformation
+- This image represnts Databricks Job Run for the Data-Model Pipeline, executing the Star Schema Transformation in the Azure End-to-End Data Engineering Project. It converts raw Silver Layer data into a structured Star Schema Model for optimized analytics.
+
+![Data Model Pipeline](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Data%20Modeling.png)
 
 ### Optimized Incremental Data Processing
 - Integration of Databricks within Azure Data Factory enhances efficiency.
-- After data is ingested into the Bronze tier, Databricks processes it further into Silver and Gold tiers.
+- After data is ingested into the Bronze Layer, Databricks processes it further into Silver and Gold Layers.
 - This end-to-end integration automates data transformation workflows.
 - The Databricks notebook performs data cleaning, transformation, and structuring for analytical readiness.
 
+![Updated Incremental](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Optimized_Incremental_Loading.png)
+
 ## Azure Resource Deployment
 - Overview of deployed Azure resources for seamless execution of the project.
+
+![Resource Group](https://github.com/Chirudc/End_to_End_Azure_Data_Engineering_Medallion_Architecture_Project/blob/main/Car%20Sales%20Azure%20Data%20Engineering%20Medallion%20Architecture%20Project/Images/Resource%20Group.png)
 
 ## Deployment & Execution Guide
 ### Prerequisites
@@ -89,13 +104,13 @@ The Medallion Framework consists of the following structured stages:
 ### Implementation Steps
 1. **Set Up Azure Data Factory Pipelines**:  
    - **Pipeline 1**: Ingest data from GitHub into Azure SQL Database.  
-   - **Pipeline 2**: Automate incremental data movement to the Bronze tier of Azure Data Lake.
+   - **Pipeline 2**: Automate incremental data movement to the Bronze Layer of Azure Data Lake.
 2. **Deploy Azure Databricks**:  
    - Establish a workspace and configure a cluster.  
    - Import and execute Databricks notebooks for data transformation.
 3. **Validate Data Flow**:  
    - Confirm raw data is stored correctly in Azure SQL Database.  
-   - Ensure seamless data movement through Bronze, Silver, and Gold tiers in Data Lake.
+   - Ensure seamless data movement through Bronze, Silver, and Gold Layers in Data Lake.
 4. **Generate Star Schema**:  
    - Execute Databricks jobs to structure data into a **star schema**.  
    - Implement **SCD Type-1** for historical updates.
@@ -104,5 +119,5 @@ The Medallion Framework consists of the following structured stages:
    - Implement monitoring and error-handling mechanisms.
 
 ## Post-Execution Analysis
-- The **Gold tier** will hold fully processed, analytics-ready data upon pipeline completion.
+- The **Gold Layer** will hold fully processed, analytics-ready data upon pipeline completion.
 - This structured dataset can be leveraged for **business intelligence, visualization, and predictive analytics**.
